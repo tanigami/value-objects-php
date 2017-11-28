@@ -23,6 +23,7 @@ Yet another collection of [Value Object](https://martinfowler.com/bliki/ValueObj
   - EmailAttachment
   - HttpMethod
   - IpAddressV4
+  - IpAddressV6
   - Url
 
 ## Installation
