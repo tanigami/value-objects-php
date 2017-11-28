@@ -17,7 +17,7 @@ class Url
     public function __construct(string $url)
     {
         if (false === filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException(sprintf('Invalid email address: %s', $url));
+            throw new InvalidArgumentException(sprintf('Invalid URL: %s', $url));
         }
         $this->url = $url;
     }

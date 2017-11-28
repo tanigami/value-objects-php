@@ -8,7 +8,7 @@ class UrlTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedMessage Invalid email address: this_is_not_url
+     * @expectedMessage Invalid URL: this_is_not_url
      */
     public function testConstructorReturnsExceptionIfUrlIsInvalid()
     {
