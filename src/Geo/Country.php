@@ -283,7 +283,12 @@ class Country
         $this->name = $name;
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return self
+     */
+    public static function __callStatic(string $name, array $arguments)
     {
         $isoCode = strtoupper($name);
         $name = Intl::getRegionBundle()->getCountryName($isoCode);

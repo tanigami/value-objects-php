@@ -207,7 +207,12 @@ class Currency
         $this->decimalPlaces = $decimalPlaces;
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return self
+     */
+    public static function __callStatic(string $name, array $arguments)
     {
         $isoCode = strtoupper($name);
         $name = Intl::getCurrencyBundle()->getCurrencyName($isoCode);
