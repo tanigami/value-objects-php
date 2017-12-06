@@ -10,6 +10,10 @@ Yet another collection of [Value Object](https://martinfowler.com/bliki/ValueObj
   - Country
   - Latitude
   - Longitude
+  - Japan
+    - Region
+    - Prefecture
+    - PrefectureSuffix
 - Money
   - Currency
   - Money
