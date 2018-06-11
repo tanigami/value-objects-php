@@ -3,6 +3,7 @@
 namespace Tanigami\ValueObjects\Geo\Japan;
 
 use BadMethodCallException;
+use InvalidArgumentException;
 
 /**
  * @method static Prefecture hokkaido
@@ -172,6 +173,60 @@ class Prefecture
         $regionFactoryMethod = $datum['region'];
 
         return new self(
+            $datum['isoCode'],
+            $datum['name'],
+            $datum['kanjiName'],
+            PrefectureSuffix::$suffixFactoryMethod(),
+            Region::$regionFactoryMethod()
+        );
+    }
+
+    /**
+     * @param string $kanjiName
+     * @return Prefecture
+     */
+    public static function ofKanjiName(string $kanjiName): self
+    {
+        $filteredData = array_filter(self::DATA, function (array $prefecture) use ($kanjiName) {
+            return $kanjiName === strtolower($prefecture['kanjiName']);
+        });
+        if ([] === $filteredData) {
+            throw new InvalidArgumentException(sprintf('There is no prefecture of kanji name: %s', $kanjiName));
+        }
+        $datum = array_shift($filteredData);
+        $suffixFactoryMethod = $datum['suffix'];
+        $regionFactoryMethod = $datum['region'];
+
+        return new self (
+            $datum['isoCode'],
+            $datum['name'],
+            $datum['kanjiName'],
+            PrefectureSuffix::$suffixFactoryMethod(),
+            Region::$regionFactoryMethod()
+        );
+    }
+
+    /**
+     * @param string $suffixedKanjiName
+     * @return Prefecture
+     */
+    public static function ofSuffixedKanjiName(string $suffixedKanjiName): self
+    {
+        $filteredData = array_filter(self::DATA, function (array $prefecture) use ($suffixedKanjiName) {
+            $suffixFactoryMethod = $prefecture['suffix'];
+
+            return $suffixedKanjiName === $prefecture['kanjiName'] . PrefectureSuffix::$suffixFactoryMethod()->kanjiName();
+        });
+        if ([] === $filteredData) {
+            throw new InvalidArgumentException(
+                sprintf('There is no prefecture of suffixed kanji name: %s', $suffixedKanjiName)
+            );
+        }
+        $datum = array_shift($filteredData);
+        $suffixFactoryMethod = $datum['suffix'];
+        $regionFactoryMethod = $datum['region'];
+
+        return new self (
             $datum['isoCode'],
             $datum['name'],
             $datum['kanjiName'],

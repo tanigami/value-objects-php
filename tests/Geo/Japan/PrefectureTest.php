@@ -252,4 +252,38 @@ class PrefectureTest extends TestCase
     {
         Prefecture::sato();
     }
+
+    public function testCreationFromKanjiName()
+    {
+        $this->assertSame('JP-47', Prefecture::ofKanjiName('沖縄')->isoCode());
+        $this->assertSame('Okinawa-ken', Prefecture::ofKanjiName('沖縄')->suffixedName());
+        $this->assertSame('沖縄県', Prefecture::ofKanjiName('沖縄')->suffixedKanjiName());
+        $this->assertTrue(Prefecture::ofKanjiName('沖縄')->region()->equals(Region::okinawa()));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage There is no prefecture of kanji name: 東都
+     */
+    public function testCreationFromInvalidKanjiName()
+    {
+        Prefecture::ofKanjiName('東都');
+    }
+
+    public function testCreationFromSuffixedKanjiName()
+    {
+        $this->assertSame('JP-47', Prefecture::ofSuffixedKanjiName('沖縄県')->isoCode());
+        $this->assertSame('Okinawa-ken', Prefecture::ofSuffixedKanjiName('沖縄県')->suffixedName());
+        $this->assertSame('沖縄県', Prefecture::ofSuffixedKanjiName('沖縄県')->suffixedKanjiName());
+        $this->assertTrue(Prefecture::ofSuffixedKanjiName('沖縄県')->region()->equals(Region::okinawa()));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage There is no prefecture of suffixed kanji name: 大阪都
+     */
+    public function testCreationFromInvalidSuffixedKanjiName()
+    {
+        Prefecture::ofSuffixedKanjiName('大阪都');
+    }
 }
