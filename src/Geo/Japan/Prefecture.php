@@ -188,7 +188,7 @@ class Prefecture
     public static function ofKanjiName(string $kanjiName): self
     {
         $filteredData = array_filter(self::DATA, function (array $prefecture) use ($kanjiName) {
-            return $kanjiName === strtolower($prefecture['kanjiName']);
+            return $kanjiName === $prefecture['kanjiName'];
         });
         if ([] === $filteredData) {
             throw new InvalidArgumentException(sprintf('There is no prefecture of kanji name: %s', $kanjiName));
@@ -214,6 +214,9 @@ class Prefecture
     {
         $filteredData = array_filter(self::DATA, function (array $prefecture) use ($suffixedKanjiName) {
             $suffixFactoryMethod = $prefecture['suffix'];
+            if ($suffixedKanjiName === '北海道') {
+                return $suffixedKanjiName === $prefecture['kanjiName'];
+            }
 
             return $suffixedKanjiName === $prefecture['kanjiName'] . PrefectureSuffix::$suffixFactoryMethod()->kanjiName();
         });

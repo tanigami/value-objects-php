@@ -272,6 +272,11 @@ class PrefectureTest extends TestCase
 
     public function testCreationFromSuffixedKanjiName()
     {
+        $this->assertSame('JP-01', Prefecture::ofSuffixedKanjiName('北海道')->isoCode());
+        $this->assertSame('Hokkaido', Prefecture::ofSuffixedKanjiName('北海道')->suffixedName());
+        $this->assertSame('北海道', Prefecture::ofSuffixedKanjiName('北海道')->suffixedKanjiName());
+        $this->assertTrue(Prefecture::ofSuffixedKanjiName('北海道')->region()->equals(Region::hokkaido()));
+
         $this->assertSame('JP-47', Prefecture::ofSuffixedKanjiName('沖縄県')->isoCode());
         $this->assertSame('Okinawa-ken', Prefecture::ofSuffixedKanjiName('沖縄県')->suffixedName());
         $this->assertSame('沖縄県', Prefecture::ofSuffixedKanjiName('沖縄県')->suffixedKanjiName());
