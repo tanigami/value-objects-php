@@ -95,4 +95,47 @@ class TimeRangeOfDayTest extends TestCase
         $this->assertFalse($timeRangeOfDay1020->includesOrEquals($timeRangeOfDay0030));
         $this->assertTrue($timeRangeOfDay0030->includesOrEquals($timeRangeOfDay0030));
     }
+
+    public function testOverlapping()
+    {
+        $time0 = new TimeOfDay(0);
+        $time1 = new TimeOfDay(1);
+        $time2 = new TimeOfDay(2);
+        $time3 = new TimeOfDay(3);
+        $this->assertSame(
+            0,
+            (new TimeRangeOfDay($time0, $time1))
+                ->overlapping(new TimeRangeOfDay($time1, $time2))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            0,
+            (new TimeRangeOfDay($time1, $time2))
+                ->overlapping(new TimeRangeOfDay($time0, $time1))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            60 * 60 * 3,
+            (new TimeRangeOfDay($time0, $time3))
+                ->overlapping(new TimeRangeOfDay($time0, $time3))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            60 * 60,
+            (new TimeRangeOfDay($time0, $time2))
+                ->overlapping(new TimeRangeOfDay($time1, $time2))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            60 * 60,
+            (new TimeRangeOfDay($time1, $time2))
+                ->overlapping(new TimeRangeOfDay($time0, $time2))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            60 * 60,
+            (new TimeRangeOfDay($time0, $time3))
+                ->overlapping(new TimeRangeOfDay($time1, $time2))
+                ->length()->hasSeconds());
+        $this->assertSame(
+            60 * 60,
+            (new TimeRangeOfDay($time1, $time2))
+                ->overlapping(new TimeRangeOfDay($time0, $time3))
+                ->length()->hasSeconds());
+    }
 }

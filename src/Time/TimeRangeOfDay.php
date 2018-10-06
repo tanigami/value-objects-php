@@ -86,6 +86,18 @@ class TimeRangeOfDay
     }
 
     /**
+     * @param self $other
+     * @return TimeRangeOfDay
+     */
+    public function overlapping(self $other): self
+    {
+        $start = $this->start()->isAfter($other->start()) ? $this->start() : $other->start();
+        $end = $this->end()->isBefore($other->end()) ? $this->end() : $other->end();
+
+        return new self($start, $end);
+    }
+
+    /**
      * @return TimeRangeOfDay
      */
     public static function am(): self
