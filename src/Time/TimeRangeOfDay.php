@@ -90,7 +90,7 @@ class TimeRangeOfDay
      */
     public static function am(): self
     {
-        return new self(new TimeOfDay(0, 0, 0), new TimeOfDay(12, 0, 0));
+        return new self(new TimeOfDay(0), new TimeOfDay(12));
     }
 
     /**
@@ -98,6 +98,14 @@ class TimeRangeOfDay
      */
     public static function pm(): self
     {
-        return new self(new TimeOfDay(12, 0, 0), new TimeOfDay(23, 59, 0));
+        return new self(new TimeOfDay(12), new TimeOfDay(23, 59, 0));
+    }
+
+    /**
+     * @return TimeRangeOfDay
+     */
+    public static function allDay(): self
+    {
+        return new self(new TimeOfDay(0), new TimeOfDay(23, 59, 0));
     }
 }
