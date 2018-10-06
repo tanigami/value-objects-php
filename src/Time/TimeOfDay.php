@@ -50,9 +50,49 @@ class TimeOfDay
     public function equals(self $other): bool
     {
         return
-            $this->hours === $other->hours &&
-            $this->minutes == $other->minutes &&
-            $this->seconds === $other->seconds;
+            $this->hours() === $other->hours() &&
+            $this->minutes() === $other->minutes() &&
+            $this->seconds() === $other->seconds();
+    }
+
+    /**
+     * @param self $other
+     * @return bool
+     */
+    public function isBefore(self $other): bool
+    {
+        return $this->hours() < $other->hours()
+            ? true
+            : ($this->minutes() < $other->minutes()
+                ? true
+                : $this->seconds() < $other->seconds());
+    }
+
+    /**
+     * @param self $other
+     * @return bool
+     */
+    public function isBeforeOrEquals(self $other): bool
+    {
+        return $this->isBefore($other) || $this->equals($other);
+    }
+
+    /**
+     * @param self $other
+     * @return bool
+     */
+    public function isAfter(self $other): bool
+    {
+        return !$this->isBeforeOrEquals($other);
+    }
+
+    /**
+     * @param self $other
+     * @return bool
+     */
+    public function isAfterOrEquals(self $other): bool
+    {
+        return !$this->isBefore($other);
     }
 
     /**

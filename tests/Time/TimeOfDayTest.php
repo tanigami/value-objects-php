@@ -68,4 +68,52 @@ class TimeOfDayTest extends TestCase
         $this->assertSame(56, $timeOfDay->seconds());
         $this->assertTrue($timeOfDay->equals(new TimeOfDay(12, 34, 56)));
     }
+
+    public function testIsBefore()
+    {
+        $one = new TimeOfDay(12, 34, 56);
+        $two = new TimeOfDay(13, 34, 56);
+        $three = new TimeOfDay(12, 35, 56);
+        $four = new TimeOfDay(12, 35, 57);
+        $this->assertTrue($one->isBefore($two));
+        $this->assertTrue($one->isBefore($three));
+        $this->assertTrue($one->isBefore($four));
+        $this->assertFalse($one->isBefore($one));
+    }
+
+    public function testIsBeforeOrEquals()
+    {
+        $one = new TimeOfDay(12, 34, 56);
+        $two = new TimeOfDay(13, 34, 56);
+        $three = new TimeOfDay(12, 35, 56);
+        $four = new TimeOfDay(12, 35, 57);
+        $this->assertTrue($one->isBeforeOrEquals($two));
+        $this->assertTrue($one->isBeforeOrEquals($three));
+        $this->assertTrue($one->isBeforeOrEquals($four));
+        $this->assertTrue($one->isBeforeOrEquals($one));
+    }
+
+    public function testIsAfter()
+    {
+        $one = new TimeOfDay(12, 34, 56);
+        $two = new TimeOfDay(13, 34, 56);
+        $three = new TimeOfDay(12, 35, 56);
+        $four = new TimeOfDay(12, 35, 57);
+        $this->assertFalse($one->isAfter($two));
+        $this->assertFalse($one->isAfter($three));
+        $this->assertFalse($one->isAfter($four));
+        $this->assertFalse($one->isAfter($one));
+    }
+
+    public function testIsAfterOrEquals()
+    {
+        $one = new TimeOfDay(12, 34, 56);
+        $two = new TimeOfDay(13, 34, 56);
+        $three = new TimeOfDay(12, 35, 56);
+        $four = new TimeOfDay(12, 35, 57);
+        $this->assertFalse($one->isAfterOrEquals($two));
+        $this->assertFalse($one->isAfterOrEquals($three));
+        $this->assertFalse($one->isAfterOrEquals($four));
+        $this->assertTrue($one->isAfterOrEquals($one));
+    }
 }

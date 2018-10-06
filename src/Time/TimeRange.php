@@ -18,8 +18,8 @@ class TimeRange
     private $end;
 
     /**
-     * @param DateTimeImmutable $from
-     * @param DateTimeImmutable $to
+     * @param DateTimeImmutable $start
+     * @param DateTimeImmutable $end
      */
     public function __construct(DateTimeImmutable $start, DateTimeImmutable $end)
     {
