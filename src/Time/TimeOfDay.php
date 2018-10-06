@@ -26,7 +26,7 @@ class TimeOfDay
      * @param int $minutes
      * @param int $seconds
      */
-    public function __construct(int $hours, int $minutes, int $seconds)
+    public function __construct(int $hours, int $minutes = 0, int $seconds = 0)
     {
         if (!(0 <= $hours && $hours < 24)) {
             throw new InvalidArgumentException(sprintf('Hours must be between 0 and 23: %s', $hours));
