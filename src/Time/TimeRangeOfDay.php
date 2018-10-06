@@ -106,6 +106,6 @@ class TimeRangeOfDay
      */
     public static function allDay(): self
     {
-        return new self(new TimeOfDay(0), new TimeOfDay(23, 59, 0));
+        return new self(new TimeOfDay(0), new TimeOfDay(23, 59, 59));
     }
 }
