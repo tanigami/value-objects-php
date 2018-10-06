@@ -18,9 +18,11 @@ Yet another collection of [Value Object](https://martinfowler.com/bliki/ValueObj
   - Currency
   - Money
 - Time
+  - Date
   - TimeLength
   - TimeOfDay
   - TimeRange
+  - TimeRangeOfDay
 - Web
   - Email
   - EmailAddress
