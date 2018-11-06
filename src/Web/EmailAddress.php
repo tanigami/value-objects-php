@@ -13,13 +13,15 @@ class EmailAddress
 
     /**
      * @param string $emailAddress
+     * @param bool $validateSoft
      */
-    public function __construct(string $emailAddress)
+    public function __construct(string $emailAddress, bool $validateSoft = false)
     {
-        if (false === filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+        if ($validateSoft && !$this->validateSoft($emailAddress) ||
+            !$validateSoft && !$this->validateStrict($emailAddress)
+        ) {
             throw new InvalidArgumentException(sprintf('Invalid email address: %s', $emailAddress));
         }
-
         $this->emailAddress = $emailAddress;
     }
 
@@ -38,5 +40,23 @@ class EmailAddress
     public function emailAddress(): string
     {
         return $this->emailAddress;
+    }
+
+    /**
+     * @param string $emailAddress
+     * @return bool
+     */
+    private function validateSoft(string $emailAddress): bool
+    {
+        return preg_match('/^.+\@\S+\.\S+$/', $emailAddress);
+    }
+
+    /**
+     * @param string $emailAddress
+     * @return bool
+     */
+    private function validateStrict(string $emailAddress): bool
+    {
+        return filter_var($emailAddress, FILTER_VALIDATE_EMAIL);
     }
 }

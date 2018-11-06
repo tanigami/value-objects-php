@@ -8,11 +8,30 @@ class EmailAddressTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedMessage nvalid email address: this_is_not_email_address
+     * @expectedMessage Invalid email address: this_is_not_email_address
      */
-    public function testConstructorReturnsExceptionIfUrlIsInvalid()
+    public function testConstructorThrowsExceptionIfUrlIsInvalid()
     {
         new EmailAddress('this_is_not_email_address');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedMessage Invalid email address: email..@example.com'
+     */
+    public function testConstructorValidatesStrict()
+    {
+        new EmailAddress('email..@example.com');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedMessage Invalid email address: this_is_not_email_address
+     */
+    public function testConstructorValidatesSoft()
+    {
+        new EmailAddress('email..@example.com', true);
+        new EmailAddress('this_is_not_email_address', true);
     }
 
     public function testGetterReturnsValueString()
