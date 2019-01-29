@@ -267,17 +267,17 @@ class Country
     /**
      * @var string
      */
-    private $isoCode;
+    protected $isoCode;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @param string $isoCode
      */
-    private function __construct(string $isoCode, string $name)
+    protected function __construct(string $isoCode, string $name)
     {
         $this->isoCode = $isoCode;
         $this->name = $name;
@@ -296,7 +296,7 @@ class Country
             throw new InvalidArgumentException(sprintf('Invalid country code: %s', $isoCode));
         }
 
-        return new self($isoCode, $name);
+        return new static($isoCode, $name);
     }
 
     /**

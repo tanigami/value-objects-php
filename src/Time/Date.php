@@ -12,17 +12,17 @@ class Date
     /**
      * @var int
      */
-    private $year;
+    protected $year;
 
     /**
      * @var int
      */
-    private $month;
+    protected $month;
 
     /**
      * @var int
      */
-    private $day;
+    protected $day;
 
     /**
      * @param int $year

@@ -9,7 +9,7 @@ class Longitude
     /**
      * @var float
      */
-    private $longitude;
+    protected $longitude;
 
     /**
      * @param float $longitude

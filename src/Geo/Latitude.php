@@ -9,7 +9,7 @@ class Latitude
     /**
      * @var float
      */
-    private $latitude;
+    protected $latitude;
 
     /**
      * @param float $latitude

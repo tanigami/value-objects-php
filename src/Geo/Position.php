@@ -7,12 +7,12 @@ class Position
     /**
      * @var Latitude
      */
-    private $latitude;
+    protected $latitude;
 
     /**
      * @var Longitude
      */
-    private $longitude;
+    protected $longitude;
 
     /**
      * @param Latitude $latitude

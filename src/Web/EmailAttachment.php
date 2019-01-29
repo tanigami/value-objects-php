@@ -153,21 +153,21 @@ class EmailAttachment
     /**
      * @var string
      */
-    private $content;
+    protected $content;
 
     /**
      * @var string
      */
-    private $fileName;
+    protected $fileName;
 
     /**
      * @var string
      */
-    private $mimeType;
+    protected $mimeType;
 
     /**
      * @param string $content
-     * @param string $filename
+     * @param string $fileName
      */
     public function __construct(string $content, string $fileName)
     {

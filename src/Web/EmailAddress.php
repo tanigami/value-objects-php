@@ -9,7 +9,7 @@ class EmailAddress
     /**
      * @var string
      */
-    private $emailAddress;
+    protected $emailAddress;
 
     /**
      * @param string $emailAddress
@@ -46,7 +46,7 @@ class EmailAddress
      * @param string $emailAddress
      * @return bool
      */
-    private function validateSoft(string $emailAddress): bool
+    protected function validateSoft(string $emailAddress): bool
     {
         return preg_match('/^.+\@\S+\.\S+$/', $emailAddress);
     }
@@ -55,7 +55,7 @@ class EmailAddress
      * @param string $emailAddress
      * @return bool
      */
-    private function validateStrict(string $emailAddress): bool
+    protected function validateStrict(string $emailAddress): bool
     {
         return filter_var($emailAddress, FILTER_VALIDATE_EMAIL);
     }

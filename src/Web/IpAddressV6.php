@@ -9,7 +9,7 @@ class IpAddressV6
     /**
      * @var string
      */
-    private $ipAddressV6;
+    protected $ipAddressV6;
 
     /**
      * @param string $ipAddressV6

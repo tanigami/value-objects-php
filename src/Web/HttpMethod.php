@@ -52,12 +52,12 @@ class HttpMethod
     /**
      * @var string
      */
-    private $httpMethod;
+    protected $httpMethod;
 
     /**
      * @param string $httpMethod
      */
-    private function __construct(string $httpMethod)
+    protected function __construct(string $httpMethod)
     {
         $this->httpMethod = $httpMethod;
     }
@@ -67,7 +67,7 @@ class HttpMethod
      */
     public static function get(): self
     {
-        return new self(self::GET);
+        return new static(self::GET);
     }
 
     /**
@@ -75,7 +75,7 @@ class HttpMethod
      */
     public static function head(): self
     {
-        return new self(self::HEAD);
+        return new static(self::HEAD);
     }
 
     /**
@@ -83,7 +83,7 @@ class HttpMethod
      */
     public static function post(): self
     {
-        return new self(self::POST);
+        return new static(self::POST);
     }
 
     /**
@@ -91,7 +91,7 @@ class HttpMethod
      */
     public static function put(): self
     {
-        return new self(self::PUT);
+        return new static(self::PUT);
     }
 
     /**
@@ -99,7 +99,7 @@ class HttpMethod
      */
     public static function delete(): self
     {
-        return new self(self::DELETE);
+        return new static(self::DELETE);
     }
 
     /**
@@ -107,7 +107,7 @@ class HttpMethod
      */
     public static function connect(): self
     {
-        return new self(self::CONNECT);
+        return new static(self::CONNECT);
     }
 
     /**
@@ -115,7 +115,7 @@ class HttpMethod
      */
     public static function options(): self
     {
-        return new self(self::OPTIONS);
+        return new static(self::OPTIONS);
     }
 
     /**
@@ -123,7 +123,7 @@ class HttpMethod
      */
     public static function trace(): self
     {
-        return new self(self::TRACE);
+        return new static(self::TRACE);
     }
 
     /**
@@ -131,7 +131,7 @@ class HttpMethod
      */
     public static function patch(): self
     {
-        return new self(self::PATCH);
+        return new static(self::PATCH);
     }
 
     /**

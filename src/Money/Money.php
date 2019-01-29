@@ -9,12 +9,12 @@ class Money
     /**
      * @var int
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @var Currency
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @param int $amount
@@ -52,18 +52,18 @@ class Money
     }
 
     /**
-     * @return self
+     * @return Money
      */
-    public function duplicate(): self
+    public function duplicate()
     {
-        return new self($this->amount(), $this->currency());
+        return new static($this->amount(), $this->currency());
     }
 
     /**
      * @param self $other
-     * @return self
+     * @return Money
      */
-    public function add(self $other): self
+    public function add(self $other): Money
     {
         if (!$this->currency()->equals($other->currency())) {
             throw new InvalidArgumentException(
@@ -75,7 +75,7 @@ class Money
             );
         }
 
-        return new self($this->amount() + $other->amount(), $this->currency());
+        return new static($this->amount() + $other->amount(), $this->currency());
     }
 
     /**
@@ -94,7 +94,7 @@ class Money
             );
         }
 
-        return new self($this->amount() - $other->amount(), $this->currency());
+        return new static($this->amount() - $other->amount(), $this->currency());
     }
 
     /**
@@ -103,7 +103,7 @@ class Money
      */
     public function multiply(float $multiplier): self
     {
-        return new self(intval(floor($this->amount() * $multiplier)), $this->currency());
+        return new static(intval(floor($this->amount() * $multiplier)), $this->currency());
     }
 
     /**
@@ -121,7 +121,7 @@ class Money
             );
         }
 
-        return new self($this->amount() + $amount, $this->currency());
+        return new static($this->amount() + $amount, $this->currency());
     }
 
     /**
@@ -139,6 +139,6 @@ class Money
             );
         }
 
-        return new self($this->amount() - $amount, $this->currency());
+        return new static($this->amount() - $amount, $this->currency());
     }
 }

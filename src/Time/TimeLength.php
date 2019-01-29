@@ -9,12 +9,12 @@ class TimeLength
     /**
      * @var int
      */
-    private $lengthInSeconds;
+    protected $lengthInSeconds;
 
     /**
      * @param int $lengthInSeconds
      */
-    private function __construct(int $lengthInSeconds)
+    protected function __construct(int $lengthInSeconds)
     {
         if (!($lengthInSeconds >= 0)) {
             throw new InvalidArgumentException(sprintf('Length cannot be negative in seconds: %s', $lengthInSeconds));
@@ -25,38 +25,38 @@ class TimeLength
 
     /**
      * @param int $seconds
-     * @return self
+     * @return TimeLength
      */
-    public static function ofSeconds(int $seconds): self
+    public static function ofSeconds(int $seconds): TimeLength
     {
-        return new self($seconds);
+        return new static($seconds);
     }
 
     /**
      * @param int $minutes
-     * @return self
+     * @return TimeLength
      */
-    public static function ofMinutes(int $minutes): self
+    public static function ofMinutes(int $minutes): TimeLength
     {
-        return new self($minutes * 60);
+        return new static($minutes * 60);
     }
 
     /**
      * @param int $hours
-     * @return self
+     * @return TimeLength
      */
-    public static function ofHours(int $hours): self
+    public static function ofHours(int $hours): TimeLength
     {
-        return new self($hours * 3600);
+        return new static($hours * 3600);
     }
 
     /**
      * @param int $days
-     * @return self
+     * @return TimeLength
      */
-    public static function ofDays(int $days): self
+    public static function ofDays(int $days): TimeLength
     {
-        return new self($days * 86400);
+        return new static($days * 86400);
     }
 
     /**

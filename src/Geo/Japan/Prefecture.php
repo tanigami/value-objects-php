@@ -112,27 +112,27 @@ class Prefecture
     /**
      * @var string
      */
-    private $isoCode;
+    protected $isoCode;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $kanjiName;
+    protected $kanjiName;
 
     /**
      * @var PrefectureSuffix
      */
-    private $suffix;
+    protected $suffix;
 
     /**
      * @var Region
      */
-    private $region;
+    protected $region;
 
     /**
      * @param string $isoCode
@@ -141,7 +141,7 @@ class Prefecture
      * @param PrefectureSuffix $suffix
      * @param Region $region
      */
-    private function __construct(
+    protected function __construct(
         string $isoCode,
         string $name,
         string $kanjiName,
@@ -172,7 +172,7 @@ class Prefecture
         $suffixFactoryMethod = $datum['suffix'];
         $regionFactoryMethod = $datum['region'];
 
-        return new self(
+        return new static(
             $datum['isoCode'],
             $datum['name'],
             $datum['kanjiName'],
@@ -197,7 +197,7 @@ class Prefecture
         $suffixFactoryMethod = $datum['suffix'];
         $regionFactoryMethod = $datum['region'];
 
-        return new self (
+        return new static(
             $datum['isoCode'],
             $datum['name'],
             $datum['kanjiName'],
@@ -229,7 +229,7 @@ class Prefecture
         $suffixFactoryMethod = $datum['suffix'];
         $regionFactoryMethod = $datum['region'];
 
-        return new self (
+        return new static(
             $datum['isoCode'],
             $datum['name'],
             $datum['kanjiName'],

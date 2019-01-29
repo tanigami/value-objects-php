@@ -10,12 +10,12 @@ class TimeRange
     /**
      * @var DateTimeImmutable
      */
-    private $start;
+    protected $start;
 
     /**
      * @var DateTimeImmutable
      */
-    private $end;
+    protected $end;
 
     /**
      * @param DateTimeImmutable $start

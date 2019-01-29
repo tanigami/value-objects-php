@@ -46,7 +46,7 @@ class Email
      * @param EmailAddress[] $tos
      * @param EmailAddress[] $ccs
      * @param EmailAddress[] $bccs
-     * @param EmailAttachment $attachments
+     * @param EmailAttachment[] $attachments
      */
     public function __construct(
         string $subject,

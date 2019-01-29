@@ -25,18 +25,18 @@ class PrefectureSuffix
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $kanjiName;
+    protected $kanjiName;
 
     /**
      * @param string $name
      * @param string $kanjiName
      */
-    private function __construct(string $name, string $kanjiName)
+    protected function __construct(string $name, string $kanjiName)
     {
         $this->name = $name;
         $this->kanjiName = $kanjiName;
@@ -57,7 +57,7 @@ class PrefectureSuffix
         }
         $datum = array_shift($filteredData);
 
-        return new self($datum['name'], $datum['kanjiName']);
+        return new static($datum['name'], $datum['kanjiName']);
     }
 
     /**

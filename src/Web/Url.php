@@ -9,7 +9,7 @@ class Url
     /**
      * @var string
      */
-    private $url;
+    protected $url;
 
     /**
      * @param string $url

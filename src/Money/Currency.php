@@ -179,17 +179,17 @@ class Currency
     /**
      * @var string
      */
-    private $isoCode;
+    protected $isoCode;
 
     /**
      * @var int
      */
-    private $decimalPlaces;
+    protected $decimalPlaces;
 
     /**
      * @param string $isoCode
      */
-    private function __construct(string $isoCode)
+    protected function __construct(string $isoCode)
     {
         $this->isoCode = $isoCode;
         if (in_array($isoCode, ['BHD', 'IQD', 'JOD', 'KWD', 'LYD', 'OMR', 'TND'])) {
@@ -210,9 +210,9 @@ class Currency
     /**
      * @param string $name
      * @param array $arguments
-     * @return self
+     * @return Currency
      */
-    public static function __callStatic(string $name, array $arguments)
+    public static function __callStatic(string $name, array $arguments): Currency
     {
         $isoCode = strtoupper($name);
         $name = Intl::getCurrencyBundle()->getCurrencyName($isoCode);
@@ -220,7 +220,7 @@ class Currency
             throw new InvalidArgumentException(sprintf('Invalid currency code: %s', $isoCode));
         }
 
-        return new self($isoCode);
+        return new static($isoCode);
     }
 
     /**

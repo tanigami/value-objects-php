@@ -9,12 +9,12 @@ class TimeRangeOfDay
     /**
      * @var TimeOfDay
      */
-    private $start;
+    protected $start;
 
     /**
      * @var TimeOfDay
      */
-    private $end;
+    protected $end;
 
     /**
      * @param TimeOfDay $start
@@ -94,7 +94,7 @@ class TimeRangeOfDay
         $start = $this->start()->isAfter($other->start()) ? $this->start() : $other->start();
         $end = $this->end()->isBefore($other->end()) ? $this->end() : $other->end();
 
-        return new self($start, $end);
+        return new static($start, $end);
     }
 
     /**
@@ -102,7 +102,7 @@ class TimeRangeOfDay
      */
     public static function am(): self
     {
-        return new self(new TimeOfDay(0), new TimeOfDay(12));
+        return new static(new TimeOfDay(0), new TimeOfDay(12));
     }
 
     /**
@@ -110,7 +110,7 @@ class TimeRangeOfDay
      */
     public static function pm(): self
     {
-        return new self(new TimeOfDay(12), new TimeOfDay(23, 59, 0));
+        return new static(new TimeOfDay(12), new TimeOfDay(23, 59, 0));
     }
 
     /**
@@ -118,6 +118,6 @@ class TimeRangeOfDay
      */
     public static function allDay(): self
     {
-        return new self(new TimeOfDay(0), new TimeOfDay(23, 59, 59));
+        return new static(new TimeOfDay(0), new TimeOfDay(23, 59, 59));
     }
 }

@@ -9,17 +9,17 @@ class TimeOfDay
     /**
      * @var int
      */
-    private $hours;
+    protected $hours;
 
     /**
      * @var int
      */
-    private $minutes;
+    protected $minutes;
 
     /**
      * @var int
      */
-    private $seconds;
+    protected $seconds;
 
     /**
      * @param int $hours

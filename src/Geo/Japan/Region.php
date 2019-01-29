@@ -37,17 +37,18 @@ class Region
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $kanjiName;
+    protected $kanjiName;
 
     /**
-     * @param array $region
+     * @param string $name
+     * @param string $kanjiName
      */
-    private function __construct(string $name, string $kanjiName)
+    protected function __construct(string $name, string $kanjiName)
     {
         $this->name = $name;
         $this->kanjiName = $kanjiName;
@@ -81,7 +82,7 @@ class Region
             new InvalidArgumentException(sprintf('Invalid region name: %s', $name))
         );
 
-        return new self($datum['name'], $datum['kanjiName']);
+        return new static($datum['name'], $datum['kanjiName']);
     }
 
     /**
@@ -96,7 +97,7 @@ class Region
             new InvalidArgumentException(sprintf('Invalid region name in kanji: %s', $kanjiName))
         );
 
-        return new self($datum['name'], $datum['kanjiName']);
+        return new static($datum['name'], $datum['kanjiName']);
     }
 
     /**
@@ -131,7 +132,7 @@ class Region
      * @return array
      * @throws Exception
      */
-    private static function filterData(string $key, string $value, Exception $e): array
+    protected static function filterData(string $key, string $value, Exception $e): array
     {
         $filteredData = array_filter(self::DATA, function (array $datum) use ($key, $value) {
             return $value === $datum[$key];
@@ -147,8 +148,8 @@ class Region
      * @param array $datum
      * @return self
      */
-    private static function createInstance(array $datum): self
+    protected static function createInstance(array $datum): self
     {
-        return new self($datum['name'], $datum['kanjiName']);
+        return new static($datum['name'], $datum['kanjiName']);
     }
 }
